@@ -1,0 +1,6 @@
+outs:
+- md5: a15cb9c3120e9d0863408fdb11db6878.dir
+  size: 151902320
+  nfiles: 1329
+  hash: md5
+  path: football-players-detection-1

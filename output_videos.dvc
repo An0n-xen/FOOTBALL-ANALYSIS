@@ -1,0 +1,6 @@
+outs:
+- md5: 8be8cfef6f74144273cadd414e37dda5.dir
+  size: 60856006
+  nfiles: 1
+  hash: md5
+  path: output_videos

@@ -2,3 +2,5 @@ models/*
 runs/*
 /models
 /runs
+/stubs
+/output_videos

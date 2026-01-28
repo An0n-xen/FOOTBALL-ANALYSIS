@@ -1,6 +1,7 @@
 from utils import read_video, save_video
 from trackers import Tracker
 from team_assigner import TeamAssigner
+from player_ball_assigner import PlayerBallAssigner
 
 def main():
     # read video
@@ -28,6 +29,20 @@ def main():
                                                  player_id)
             object_tracks['players'][frame_num][player_id]['team'] = team 
             object_tracks['players'][frame_num][player_id]['team_color'] = team_assigner.team_colors[team]
+
+    # Assign ball aqusistion 
+    player_assigner = PlayerBallAssigner()
+    for frame_num, player_track in enumerate(object_tracks['players']):
+        ball_dict = object_tracks['ball'][frame_num].get(1, {})
+        ball_bbox = ball_dict.get('bbox', None)
+        if ball_bbox is None:
+            continue  # Skip frames where ball isn't detected
+        assigned_player = player_assigner.assign_ball_to_player(player_track,ball_bbox)
+
+        if assigned_player != -1:
+            object_tracks['players'][frame_num][assigned_player]['has_ball'] = True
+            
+
 
     # Draw output
     output_video_frames = tracker.draw_annotations(video_frames, object_tracks)
